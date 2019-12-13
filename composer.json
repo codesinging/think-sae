@@ -8,10 +8,15 @@
             "email": "codesinging@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "topthink/framework": "^5.1"
+    },
     "autoload": {
         "psr-4": {
             "CodeSinging\\ThinkSae\\": "src"
-        }
+        },
+        "files": [
+            "src/bootstrap.php"
+        ]
     }
 }

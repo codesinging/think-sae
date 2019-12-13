@@ -1,6 +1,8 @@
-<h1 align="center"> think-sae </h1>
+# Think-SAE
 
-<p align="center"> A package for ThinkPHP5.1 to support SAE..</p>
+A package for ThinkPHP5.1 to support SAE.
+
+This package is based on [topthink/thinks-sae](https://github.com/top-think/think-sae/tree/2.0).
 
 
 ## Installing
