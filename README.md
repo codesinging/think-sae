@@ -1,6 +1,6 @@
 # Think-SAE
 
-A ThinkPHP5.1 extension for SAE support.
+A ThinkPHP5.1 extension for SAE support， compatible with common environment.
 
 This package is based on [topthink/thinks-sae](https://github.com/top-think/think-sae/tree/2.0).
 
@@ -13,7 +13,7 @@ $ composer require codesinging/think-sae -vvv
 
 ## Usage
 
-TODO
+You can run your ThinkPHP project in SAE without any setting after you installed this package via composer.
 
 ## Contributing
 

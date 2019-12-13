@@ -1,6 +1,6 @@
 {
     "name": "codesinging/think-sae",
-    "description": "A ThinkPHP5.1 extension for SAE support",
+    "description": "A ThinkPHP5.1 extension for SAE support.",
     "license": "MIT",
     "authors": [
         {
