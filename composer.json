@@ -1,0 +1,17 @@
+{
+    "name": "codesinging/think-sae",
+    "description": "A package for ThinkPHP5.1 to support SAE.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "codesinging",
+            "email": "codesinging@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "CodeSinging\\ThinkSae\\": "src"
+        }
+    }
+}
