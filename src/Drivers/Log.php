@@ -12,7 +12,7 @@ class Log implements LogHandlerInterface
     {
 
         if (!empty($log)) {
-            $info = 'TpLog:';
+            $info = '<TpLog>';
             foreach ($log as $type => $val) {
                 foreach ($val as $msg) {
                     if (!is_string($msg)) {
@@ -21,7 +21,7 @@ class Log implements LogHandlerInterface
                     $info .= '[' . $type . ']' . $msg ;
                 }
             }
-            $info .= ':TpLog';
+            $info .= '</TpLog>';
             sae_debug($info);
 
             return true;
