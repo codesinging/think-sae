@@ -1,6 +1,6 @@
 # Think-SAE
 
-A ThinkPHP5.1 extension for SAE support， compatible with common environment.
+A ThinkPHP package for SAE support， compatible with common environment and SAE.
 
 This package is based on [topthink/thinks-sae](https://github.com/top-think/think-sae/tree/2.0).
 

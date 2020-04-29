@@ -1,80 +1,68 @@
 <?php
-/**
- * Author: CodeSinging <codesinging@gmail.com>
- * Time: 2019/12/13 15:04
- */
+
 
 namespace CodeSinging\ThinkSae\Drivers;
+
 
 use think\Exception;
 
 class Template
 {
-    // mc 对象
-    private $mc;
-    // 编译缓存内容
+    private $cache;
     private $contents = [];
 
-    /**
-     * 架构函数
-     * @access public
-     */
     public function __construct()
     {
-        if (!function_exists('sae_debug')) {
-            throw new Exception('请在SAE平台上运行代码。');
-        }
-        $this->mc = new \Memcached();
-        if (!$this->mc) {
-            throw new Exception('您未开通Memcache服务，请在SAE管理平台初始化Memcache服务');
+        $this->cache = new \Memcached();
+        if (!$this->cache) {
+            throw new Exception('新建 Memcached 实例错误');
         }
     }
 
     /**
      * 写入编译缓存
-     *
+     * @access public
      * @param string $cacheFile 缓存的文件名
-     * @param string $content   缓存的内容
-     *
-     * @return void|array
+     * @param string $content 缓存的内容
+     * @return void
+     * @throws Exception
      */
-    public function write($cacheFile, $content)
+    public function write(string $cacheFile, string $content): void
     {
-        // 添加写入时间
         $content = $_SERVER['REQUEST_TIME'] . $content;
-        if (!$this->mc->set($cacheFile, $content, 0)) {
-            throw new Exception('sae mc write error:' . $cacheFile);
-        } else {
+
+        if ($this->cache->set($cacheFile, $content, 0)) {
             $this->contents[$cacheFile] = $content;
-            return true;
+            return;
         }
+        throw new Exception('Sae memcached write error: ' . $cacheFile);
     }
 
     /**
      * 读取编译编译
-     *
+     * @access public
      * @param string $cacheFile 缓存的文件名
-     * @param array  $vars      变量数组
-     *
+     * @param array $vars 变量数组
      * @return void
      */
-    public function read($cacheFile, $vars = [])
+    public function read(string $cacheFile, array $vars = []): void
     {
         if (!empty($vars) && is_array($vars)) {
+            // 模板阵列变量分解成为独立变量
             extract($vars, EXTR_OVERWRITE);
         }
+
         eval('?>' . $this->get($cacheFile, 'content'));
     }
 
     /**
      * 检查编译缓存是否有效
-     *
+     * @access public
      * @param string $cacheFile 缓存的文件名
-     * @param int    $cacheTime 缓存时间
-     *
-     * @return boolean
+     * @param int $cacheTime 缓存时间
+     * @return bool
      */
-    public function check($cacheFile, $cacheTime)
+    public function check(string $cacheFile, int $cacheTime): bool
     {
         $mtime = $this->get($cacheFile, 'mtime');
         if (0 != $cacheTime && $_SERVER['REQUEST_TIME'] > $mtime + $cacheTime) {
@@ -89,14 +77,14 @@ class Template
      * @access private
      *
      * @param string $filename 文件名
-     * @param string $name     信息名 mtime或者content
+     * @param string $name 信息名 mtime或者content
      *
      * @return boolean
      */
     private function get($filename, $name)
     {
         if (!isset($this->contents[$filename])) {
-            $this->contents[$filename] = $this->mc->get($filename);
+            $this->contents[$filename] = $this->cache->get($filename);
         }
         $content = $this->contents[$filename];
         if (false === $content) {
