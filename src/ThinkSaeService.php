@@ -22,7 +22,7 @@ class ThinkSaeService extends Service
      */
     public function boot()
     {
-        if (defined('SAE_APPNAME')){
+        if (defined('SAE_APPNAME')) {
             $this->mergeConfig();
         }
     }
@@ -36,8 +36,8 @@ class ThinkSaeService extends Service
         $saeConfig = Config::get('sae');
 
         // Get the cache stores
-        $cacheStores= Config::get('cache.stores');
-        $cacheStores[$saeConfig['cache']['default']] = $saeConfig['cache']['stores']['sae'];
+        $cacheStores = Config::get('cache.stores');
+        $cacheStores[$saeConfig['cache']['default']] = $saeConfig['cache']['stores'][$saeConfig['cache']['default']];
 
         // Merge the cache stores to the cache configuration
         Config::set([
@@ -47,7 +47,7 @@ class ThinkSaeService extends Service
 
         // Get the log channels
         $logChannels = Config::get('log.channels');
-        $logChannels[$saeConfig['log']['default']] = $saeConfig['log']['channels']['sae'];
+        $logChannels[$saeConfig['log']['default']] = $saeConfig['log']['channels'][$saeConfig['log']['default']];
 
         // Merge the log channel to the log configuration
         Config::set([
@@ -60,7 +60,14 @@ class ThinkSaeService extends Service
             'compile_type' => $saeConfig['view']['compile_type']
         ], 'view');
 
+        // Get the database connections
+        $databaseConnections = Config::get('database.connections');
+        $databaseConnections[$saeConfig['database']['default']] = $saeConfig['database']['connections'][$saeConfig['database']['default']];
+
         // Merge the database configuration
-        Config::set($saeConfig['database'], 'database');
+        Config::set([
+            'default' => $saeConfig['database']['default'],
+            'connections' => $databaseConnections,
+        ], 'database');
     }
 }
