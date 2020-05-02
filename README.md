@@ -7,8 +7,14 @@ This package is based on [topthink/thinks-sae](https://github.com/top-think/thin
 
 ## Installing
 
+### For ThinkPHP 5.1
 ```shell
-$ composer require codesinging/think-sae -vvv
+$ composer require codesinging/think-sae:^1.0 -vvv
+```
+
+### For ThinkPHP 6
+```shell
+$ composer require codesinging/think-sae:^2.0 -vvv
 ```
 
 ## Usage
