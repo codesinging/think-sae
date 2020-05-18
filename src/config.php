@@ -35,7 +35,7 @@ return [
                 'database' => SAE_MYSQL_DB,
                 'username' => SAE_MYSQL_USER,
                 'password' => SAE_MYSQL_PASS,
-                'hostport' => SAE_MYSQL_PORT,
+                'hostport' => SAE_MYSQL_PORT . ',' . SAE_MYSQL_PORT,
                 'charset' => 'utf8mb4',
                 'deploy' => 1,
                 'rw_separate' => true,
