@@ -36,6 +36,7 @@ return [
                 'username' => SAE_MYSQL_USER,
                 'password' => SAE_MYSQL_PASS,
                 'hostport' => SAE_MYSQL_PORT,
+                'charset' => 'utf8mb4',
                 'deploy' => 1,
                 'rw_separate' => true,
             ] : []
