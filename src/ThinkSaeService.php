@@ -69,5 +69,11 @@ class ThinkSaeService extends Service
             'default' => 'sae',
             'connections' => $databaseConnections,
         ], 'database');
+
+        // Merge the session configuration
+        $sessionConfig = $saeConfig['session'];
+        Config::set([
+            'type' => $sessionConfig['type'],
+        ], 'session');
     }
 }

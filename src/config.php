@@ -42,4 +42,9 @@ return [
             ] : []
         ]
     ],
+
+    // Session
+    'session' => [
+        'type' => 'cache',
+    ]
 ];
