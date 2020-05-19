@@ -14,14 +14,6 @@ use think\Service;
 
 class ThinkSaeService extends Service
 {
-
-    /**
-     * Register service
-     */
-    public function register()
-    {
-    }
-
     /**
      * Bootstrap service
      */
