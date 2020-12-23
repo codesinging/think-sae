@@ -8,7 +8,6 @@
 
 namespace CodeSinging\ThinkSae;
 
-
 use think\facade\Config;
 use think\Service;
 
@@ -25,12 +24,23 @@ class ThinkSaeService extends Service
     }
 
     /**
+     * Get configuration
+     * @return array
+     */
+    private function getConfig()
+    {
+        $config = include_once(__DIR__ . '/config.php');
+
+        return $config ?? [];
+    }
+
+    /**
      * Merge configuration
      */
     private function mergeConfig()
     {
         // Get the Sae driver configuration
-        $saeConfig = Config::get('sae');
+        $saeConfig = Config::get('sae') ?: $this->getConfig();
 
         // Get the cache stores
         $cacheStores = Config::get('cache.stores');
